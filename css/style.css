@@ -21,7 +21,7 @@
   box-sizing: border-box
 }
 
-/* HTML + Breakpoints (wie Fotografie) */
+/* HTML + Breakpoints*/
 html {
   font-size: 100%;
   scroll-behavior: smooth;
@@ -159,11 +159,42 @@ img {
 }
 
 .header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 14px 0;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:1rem;
+  padding:14px 0;
+}
+
+@media (max-width:62em){
+  .header-inner{
+    justify-content:flex-start;  /* Brand startet links */
+  }
+
+  /* Burger nach rechts schieben */
+  .nav-toggle{
+    display:block;               /* ist bei dir schon so */
+    margin-left:auto;            /* schiebt ihn an den rechten Rand */
+  }
+
+  /* fixe Navi nimmt im Header keinen Platz ein */
+  .site-nav{
+    margin-left:0;               /* Desktop-Push rückgängig machen */
+  }
+
+  /* angenehme Innenabstände im Header behalten */
+  .site-header .container{
+    padding-left:2rem;
+    padding-right:2rem;
+  }
+}
+
+/* ≤ 576px: etwas schmalere Gutter, optional – falls du global 1rem willst */
+@media (max-width:36em){
+  .site-header .container{
+    padding-left:1rem;
+    padding-right:1rem;
+  }
 }
 
 .brand {
@@ -187,6 +218,11 @@ img {
 
 .brand.small img {
   opacity: .9
+}
+
+.site-nav{
+  margin-left:auto;        /* nimmt den Restplatz und dockt rechts an */
+  min-width:0;             /* verhindert Overflow in Edge-Cases */
 }
 
 .site-nav ul {
@@ -276,9 +312,9 @@ img {
   color: var(--brand)
 }
 
-.grid-2 {
+.grid-2{
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
+  grid-template-columns: minmax(0,1.3fr) minmax(0,1fr);
   gap: 3rem;
   align-items: center;
 }
@@ -343,9 +379,9 @@ img {
 
 .device-stack {
   position: relative;
-  width: 82vw;
-  max-width: 32.5rem;
+  width: min(100%, 32.5rem);
   aspect-ratio: 16/11;
+  margin-inline: auto;
 }
 
 .device {
@@ -356,21 +392,9 @@ img {
   box-shadow: var(--shadow);
 }
 
-.device--laptop {
-  inset: 8% -2% 12% 8%;
-  transform: rotate(-2deg)
-}
-
-.device--tablet {
-  inset: 22% 10% 2% 0;
-  transform: rotate(4deg)
-}
-
-.device--phone {
-  inset: 42% 52% 0 22%;
-  transform: rotate(-6deg);
-  border-radius: 30px
-}
+.device--laptop{ inset: 8% 0 12% 8%; transform: rotate(-2deg); }
+.device--tablet{ inset: 22% 10% 2% 0; transform: rotate(4deg); }
+.device--phone { inset: 42% 52% 0 22%; transform: rotate(-6deg); border-radius: 30px; }
 
 /* ---------- Cards ---------- */
 .cards {
@@ -707,17 +731,6 @@ textarea {
   min-height: calc(100svh - 72px)
 }
 
-.scroll-down {
-  position: absolute;
-  left: 50%;
-  bottom: 10px;
-  transform: translateX(-50%);
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 40px;
-  line-height: 1
-}
-
 /* ---------- Responsive Navigation ---------- */
 @media (max-width:62em) {
   .site-nav {
@@ -760,8 +773,111 @@ textarea {
   }
 
   .site-header,
-  .site-footer,
-  .scroll-down {
+  .site-footer {
     display: none
   }
+}
+
+/* 1255px–993px: mehr Rand links/rechts nur im Header */
+@media (max-width:78.5em) and (min-width:62.0625em){
+  .site-header .container{
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+  /* optional etwas enger, damit nichts quetscht */
+  .site-nav ul{ gap: 1.25rem; }
+  .btn.btn-primary{ padding-inline: 1rem; }
+}
+
+
+/* --- Buttons: Apple-clean, green accent ----------------------------------- */
+:root{
+  --accent: var(--brand);         /* #00e29c */
+  --accent-weak: rgba(0,226,156,.18);
+  --btn-dark: #0c152e;
+  --btn-dark-2: #0a1227;
+  --btn-border: #1a2344;
+}
+
+/* Grund-Button (bestehende .btn darf bleiben – hier etwas veredelt) */
+.btn{
+  position: relative;
+  overflow: hidden;
+  padding: .9rem 1.15rem;
+  border-radius: 14px;
+  border: 1px solid var(--btn-border);
+  background: linear-gradient(180deg, var(--btn-dark), var(--btn-dark-2));
+  color: var(--txt);
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  transition: transform .2s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 10px 30px rgba(0,0,0,.25);
+}
+.btn:hover{ transform: translateY(-2px); }
+
+/* Primär-CTA: dunkler Kern, grün irisierende Kante + Sheen */
+.btn-primary{
+  border-color: transparent;
+  background: linear-gradient(180deg, #0f1b38 0%, #0a142b 100%);
+}
+.btn-primary::before{
+  /* Gradient-Border via Mask – wirkt „glossy“ an der Kante */
+  content:"";
+  position:absolute; inset:-1px;
+  border-radius: inherit; padding:1px;
+  background: linear-gradient(135deg, rgba(0,226,156,.65), rgba(0,226,156,.08) 45%, rgba(0,226,156,.55));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  pointer-events:none; opacity:.9; transition: opacity .25s ease;
+}
+.btn-primary::after{
+  /* eleganter Licht-Sweep beim Hover */
+  content:"";
+  position:absolute; top:-60%; bottom:-60%; left:-40%; right:-40%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 35%, rgba(255,255,255,.16) 50%, rgba(255,255,255,0) 65%);
+  transform: translateX(-120%) rotate(12deg);
+  transition: transform .7s cubic-bezier(.22,.61,.36,1);
+  pointer-events:none;
+}
+.btn-primary:hover{
+  box-shadow:
+    0 0 0 3px var(--accent-weak),
+    0 18px 45px rgba(0,226,156,.18),
+    var(--shadow);
+  background: linear-gradient(180deg, #122044 0%, #0b162f 100%);
+}
+.btn-primary:hover::after{ transform: translateX(120%) rotate(12deg); }
+
+/* Outline-Variante: fein, ruhig, passend zu Links/Kontakt */
+.btn-outline{
+  background: transparent;
+  border-color: rgba(0,226,156,.55);
+}
+.btn-outline:hover{
+  background: rgba(0,226,156,.08);
+  box-shadow: 0 8px 28px rgba(0,226,156,.15);
+}
+
+/* Ghost bleibt sehr zurückhaltend */
+.btn-ghost{
+  background: transparent;
+  border-color: transparent;
+}
+.btn-ghost:hover{ background: rgba(255,255,255,.04); }
+
+/* Fokus – Accessibility in deinem Brand */
+.btn:focus-visible{
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(0,226,156,.28),
+    0 0 0 6px rgba(0,226,156,.16);
+}
+
+/* Weniger Bewegung, wenn Nutzer es wollen */
+@media (prefers-reduced-motion: reduce){
+  .btn, .btn-primary::after{ transition: none; }
+  .btn:hover{ transform:none; }
 }
