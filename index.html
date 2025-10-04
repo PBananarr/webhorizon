@@ -1,7 +1,6 @@
 <!--
---------------------index.html--------------------
+-------------------- index.html --------------------
 -->
-
 <!DOCTYPE html>
 <html lang="de">
 
@@ -18,11 +17,7 @@
   <meta property="og:image" content="assets/og-cover.png" />
   <link rel="icon" href="img/webhorizon-solutions-logo-monogramm-rund.svg" type="image/svg+xml">
   <link rel="preload" href="style.css" as="style" />
-
-  <!--style.css-->
   <link rel="stylesheet" href="style.css" />
-
-  <!--main.js-->
   <script defer src="main.js"></script>
 </head>
 
@@ -31,7 +26,7 @@
 
   <header class="site-header" id="top">
     <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="WebHorizon Solutions Startseite">
+      <a class="brand" href="#" aria-label="WebHorizon Solutions Startseite">
         <img src="img/webhorizon-monogramm-ohne-bg_500x5000.svg" alt="" class="brand-mark" width="48" height="48" />
         <span class="brand-text">WebHorizon <em>Solutions</em></span>
       </a>
@@ -54,6 +49,8 @@
 
   <main id="main">
     <section class="hero section--full">
+      <!-- Sternenhimmel über die komplette Hero-Fläche -->
+      <div class="hero-stars" aria-hidden="true"></div>
       <div class="container grid-2">
         <div class="hero-copy reveal">
           <p class="eyebrow">Webdesign & Hosting mit Weitblick</p>
@@ -69,16 +66,26 @@
             <li>SEO-ready & barrierearm</li>
           </ul>
         </div>
+        <!-- Hero Right: 3D-Glaswürfel -->
         <div class="hero-art reveal">
-          <div class="device-stack" aria-label="Vorschau auf Geräte">
-            <div class="device device--laptop" data-device="laptop" role="button" tabindex="0" aria-pressed="false"
-              aria-label="Laptop"></div>
-            <div class="device device--tablet" data-device="tablet" role="button" tabindex="0" aria-pressed="false"
-              aria-label="Tablet"></div>
-            <div class="device device--phone" data-device="phone" role="button" tabindex="0" aria-pressed="false"
-              aria-label="Smartphone"></div>
-          </div>
-
+          <figure class="ghc" id="glassCube" data-size="min(56vmin, 460px)">
+            <div class="ghc-wrap">
+              <div class="ghc-scene" aria-hidden="true">
+                <div class="ghc-cube">
+                  <div class="ghc-fx"></div>
+                  <div class="ghc-face ghc-back"></div>
+                  <div class="ghc-face ghc-right"></div>
+                  <div class="ghc-face ghc-left"></div>
+                  <div class="ghc-face ghc-top"></div>
+                  <div class="ghc-face ghc-bottom"></div>
+                  <div class="ghc-monogram">
+                    <div class="ghc-plate"></div>
+                    <img class="ghc-logo" src="img/webhorizon-monogramm-ohne-bg_500x5000.svg" alt="WebHorizon Monogramm">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </figure>
         </div>
       </div>
     </section>
@@ -105,7 +112,7 @@
 
           <article class="card reveal">
             <h3>Entwicklung</h3>
-            <p>Sauberer, wartbarer Code. Moderne Toolchain, schnelle Ladezeiten, SEO‑freundlich.</p>
+            <p>Sauberer, wartbarer Code. Moderne Toolchain, schnelle Ladezeiten, SEO-freundlich.</p>
             <ul class="check">
               <li>Static/Headless/Classic – passend zum Projekt</li>
               <li>Core Web Vitals optimiert</li>
@@ -146,12 +153,12 @@
           <li class="step reveal">
             <span class="step-num">3</span>
             <h3>Build & Launch</h3>
-            <p>Entwicklung, Tests, Performance‑Tuning, Launch & Übergabe.</p>
+            <p>Entwicklung, Tests, Performance-Tuning, Launch & Übergabe.</p>
           </li>
           <li class="step reveal">
             <span class="step-num">4</span>
             <h3>Care & Growth</h3>
-            <p>Wartung, Hosting, SEO‑Feinschliff & Weiterentwicklung.</p>
+            <p>Wartung, Hosting, SEO-Feinschliff & Weiterentwicklung.</p>
           </li>
         </ol>
       </div>
@@ -168,8 +175,8 @@
           <button class="gallery-control prev" aria-label="Vorheriges Projekt">‹</button>
           <div class="gallery-track">
             <figure class="tile">
-              <img src="img/saints-tattoo-website-pirna.jpg" alt="Projekt A – E‑Commerce Landing" />
-              <figcaption>Projekt A – E‑Commerce Landing</figcaption>
+              <img src="img/saints-tattoo-website-pirna.jpg" alt="Projekt A – E-Commerce Landing" />
+              <figcaption>Projekt A – E-Commerce Landing</figcaption>
             </figure>
             <figure class="tile">
               <img src="img/coming-soon.png" alt="Projekt B – Portfolio Seite" />
@@ -215,7 +222,7 @@
             <label>Dein Name
               <input required type="text" name="name" autocomplete="name" />
             </label>
-            <label>E‑Mail
+            <label>E-Mail
               <input required type="email" name="email" autocomplete="email" />
             </label>
           </div>
@@ -236,7 +243,7 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <a class="brand small" href="#top">
+      <a class="brand small" href="#">
         <img src="img/webhorizon-monogramm-ohne-bg_500x5000.svg" alt="" width="48" height="48">
         <span>WebHorizon <em>Solutions</em></span>
       </a>

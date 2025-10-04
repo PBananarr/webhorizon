@@ -1,20 +1,50 @@
-// Mobile nav toggle
-const nav = document.getElementById('nav');
+/* 
+-------------------- main.js --------------------
+*/
+
+// Mobile nav toggle + close on link / outside / ESC
+const nav    = document.getElementById('nav');
 const toggle = document.querySelector('.nav-toggle');
-if (toggle) {
+
+const openNav = () => {
+  nav.classList.add('open');
+  toggle.setAttribute('aria-expanded', 'true');
+  document.body.classList.add('nav-open');
+};
+
+const closeNav = () => {
+  nav.classList.remove('open');
+  toggle.setAttribute('aria-expanded', 'false');
+  document.body.classList.remove('nav-open');
+};
+
+if (toggle && nav) {
   toggle.addEventListener('click', () => {
-    const open = nav.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', String(open));
+    const willOpen = !nav.classList.contains('open');
+    willOpen ? openNav() : closeNav();
+  });
+
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+
+  document.addEventListener('click', (e) => {
+    if (!nav.classList.contains('open')) return;
+    const clickedInsideNav    = nav.contains(e.target);
+    const clickedToggleButton = toggle.contains(e.target);
+    if (!clickedInsideNav && !clickedToggleButton) closeNav();
+  }, { capture: true });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav.classList.contains('open')) {
+      closeNav();
+      toggle.focus();
+    }
   });
 }
 
 // IntersectionObserver reveal
 const io = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('is-visible');
-  });
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('is-visible'); });
 }, {threshold: .2});
-
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 // Gallery basic slider (buttons + drag/swipe)
@@ -34,42 +64,64 @@ if (gallery) {
   next.addEventListener('click', () => to(index + 1));
 
   // drag/swipe
-  let startX = 0, scrolling = false;
-  track.addEventListener('pointerdown', (e) => { scrolling = true; startX = e.clientX; track.setPointerCapture(e.pointerId); });
-  track.addEventListener('pointerup',   (e) => { scrolling = false; const dx = e.clientX - startX; if (dx > 40) to(index-1); if (dx < -40) to(index+1); });
+  let startX = 0;
+  track.addEventListener('pointerdown', (e) => { startX = e.clientX; track.setPointerCapture(e.pointerId); });
+  track.addEventListener('pointerup',   (e) => {
+    const dx = e.clientX - startX;
+    if (dx > 40) to(index-1);
+    if (dx < -40) to(index+1);
+  });
 }
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Hero: Device-Interaktion
-const stack = document.querySelector('.device-stack');
-if (stack) {
-  const devices = Array.from(stack.querySelectorAll('.device'));
+// ===== HERO STARFIELD: Sterne global im Hero ==================
+(() => {
+  const hero = document.querySelector('.hero');
+  const field = hero?.querySelector('.hero-stars');
+  if (!hero || !field) return;
 
-  // einfache Detection: kein Hover = Touchgerät
-  const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
-
-  const setActive = (el) => {
-    const isActive = el.classList.contains('is-active');
-    devices.forEach(d => { d.classList.remove('is-active'); d.setAttribute('aria-pressed', 'false'); });
-    stack.classList.remove('has-active');
-
-    if (!isActive) {
-      el.classList.add('is-active');
-      el.setAttribute('aria-pressed', 'true');
-      stack.classList.add('has-active');
+  const base = 120;
+  const extra = Math.round((window.innerWidth * window.innerHeight) / (1200 * 800) * 60);
+  const make = (n) => {
+    field.innerHTML = '';
+    for (let i = 0; i < n; i++) {
+      const s = document.createElement('span');
+      const size = Math.random() < 0.85 ? 2 : 3;
+      s.style.left = (Math.random() * 100) + '%';
+      s.style.top  = (Math.random() * 100) + '%';
+      s.style.width = size + 'px';
+      s.style.height = size + 'px';
+      s.style.animationDelay = (Math.random() * 6) + 's';
+      field.appendChild(s);
     }
   };
+  make(Math.min(260, base + extra));
 
-  if (isTouch) {
-    // Nur auf Touch-Geräten Klick/Key aktivieren
-    devices.forEach(d => {
-      d.addEventListener('click', () => setActive(d));
-      d.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(d); }
-      });
-    });
+  let t = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(t);
+    t = setTimeout(() => {
+      const extra = Math.round((window.innerWidth * window.innerHeight) / (1200 * 800) * 60);
+      make(Math.min(260, base + extra));
+    }, 150);
+  });
+})();
+
+// ===== GHC: 3D-Glaskarte (ohne HUD, ohne Parallax) ======================
+(() => {
+  const root  = document.getElementById('glassCube');
+  if (!root) return;
+
+  const stars = root.querySelector('.ghc-stars');
+
+  // Ambient "stars"
+  const count = 80;
+  for (let i = 0; i < count; i++) {
+    const s = document.createElement('span');
+    s.style.left = (Math.random() * 100) + '%';
+    s.style.top  = (Math.random() * 100) + '%';
+    s.style.animationDelay = (Math.random() * 6) + 's';
+    stars.appendChild(s);
   }
-}
-
-
+})();
