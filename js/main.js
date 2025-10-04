@@ -40,3 +40,36 @@ if (gallery) {
 }
 
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// Hero: Device-Interaktion
+const stack = document.querySelector('.device-stack');
+if (stack) {
+  const devices = Array.from(stack.querySelectorAll('.device'));
+
+  // einfache Detection: kein Hover = Touchgerät
+  const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+  const setActive = (el) => {
+    const isActive = el.classList.contains('is-active');
+    devices.forEach(d => { d.classList.remove('is-active'); d.setAttribute('aria-pressed', 'false'); });
+    stack.classList.remove('has-active');
+
+    if (!isActive) {
+      el.classList.add('is-active');
+      el.setAttribute('aria-pressed', 'true');
+      stack.classList.add('has-active');
+    }
+  };
+
+  if (isTouch) {
+    // Nur auf Touch-Geräten Klick/Key aktivieren
+    devices.forEach(d => {
+      d.addEventListener('click', () => setActive(d));
+      d.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(d); }
+      });
+    });
+  }
+}
+
+
