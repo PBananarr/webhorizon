@@ -910,6 +910,12 @@ textarea {
     justify-content: center
   }
 }
+@media (max-width:36em) {
+  .hero .btn {
+    width: auto;
+    justify-content: flex-start;
+  }
+}
 
 /* ---------- Print ---------- */
 @media print {
@@ -992,9 +998,7 @@ body.nav-open {
 
 
 
-
-
-
+/* Würfel - Monogram - Hero*/
 :root{
   --size: 320px;        /* Kantenlänge des Würfels */
   --img: 0.78;          /* 0..1 => Bildgröße relativ zum Würfel */
@@ -1002,12 +1006,10 @@ body.nav-open {
   --spin: 40s;          /* Dauer für eine Umdrehung */
 }
 
-/* WICHTIG: Perspektive NICHT am body setzen, sondern lokal am Wrapper */
+
 .cube-scene{
-  /* passt sich sauber in dein Grid ein */
   perspective: 900px;
   perspective-origin: 50% 45%;
-  /* optional zentrieren ohne das Seitenlayout zu verändern */
   display: grid;
   place-items: center;
 }
@@ -1022,7 +1024,7 @@ body.nav-open {
   will-change: transform;
 }
 
-/* Der eigentliche Würfel rotiert um seine (geneigte) Y-Achse */
+
 .cube{
   position: absolute;
   inset: 0;
@@ -1031,7 +1033,7 @@ body.nav-open {
   will-change: transform;
 }
 
-/* Jede Fläche exakt so groß wie der Würfel */
+/* Würfel */
 .face{
   position: absolute;
   width: var(--size);
@@ -1066,7 +1068,7 @@ body.nav-open {
   object-fit: cover;
   box-shadow: 0 0 18px #ffffff55;
   pointer-events: none;
-  max-width: none; /* überschreibt dein globales img{max-width:100%} */
+  max-width: none; /* überschreibt globales img{max-width:100%} */
 }
 
 @keyframes spin{
@@ -1075,7 +1077,6 @@ body.nav-open {
 }
 
 
-/* Desktop groß → Standard: --size: 320px (aus deinem :root) */
 
 /* <= 1500px (große Laptops) */
 @media (max-width: 1500px) {
@@ -1106,3 +1107,56 @@ body.nav-open {
 @media (max-width: 420px) {
   :root { --size: 160px; }
 }
+
+
+/* ---------------- Hero Typo-Rhythmus (Abstände & Zeilenbild) ---------------- */
+
+/* Optional: etwas schmalere Textspalte für besseren Rhythmus auf großen Screens */
+.hero .hero-copy { max-width: 42rem; }
+
+/* Eyebrow -> H1 -> Lead besser staffeln */
+.hero .eyebrow {
+  margin-bottom: .75rem;
+}
+
+.hero h1 {
+  /* etwas kompakter als vorher (.25em/.4em) */
+  margin: .15em 0 .35em;
+  line-height: 1.05; /* beibehalten für knackiges Zeilenbild */
+}
+
+.hero .lead {
+  margin: 0 0 1.25rem;   /* vorher kein margin: gibt Luft vor der CTA */
+}
+
+/* Tablet & kleiner: noch einen Tick Luft, damit nichts klebt */
+@media (max-width:62em) {
+  .hero h1 { margin: .2em 0 .4em; }
+  .hero .lead { margin-bottom: 1.1rem; }
+}
+
+/* Phone: feines Letterspacing & saubere CTA-Abstände */
+@media (max-width:36em) {
+  .hero .eyebrow { letter-spacing: .18em; } /* minimal ruhiger */
+  .hero h1 { line-height: 1.08; margin: .22em 0 .42em; }
+  .hero .lead { margin-bottom: 1rem; }
+  .hero .cta-row { margin-top: 1.2rem; } /* harmoniert mit neuer Lead-Margin */
+  .hero .btn { width: auto; justify-content: flex-start; } /* Sicherheitshalber erneut */
+}
+
+
+/* ---------- Hero: zusätzlicher Abstand über dem Cube im Einspalter ---------- */
+@media (max-width:62em) {        /* <= 992px */
+  .hero .cube-scene { margin-top: 2rem; }
+}
+
+@media (max-width:48em) {        /* <= 768px */
+  .hero .cube-scene { margin-top: 2.25rem; }
+}
+
+@media (max-width:36em) {        /* <= 576px */
+  .hero .cube-scene { margin-top: 2.5rem; }
+}
+
+
+

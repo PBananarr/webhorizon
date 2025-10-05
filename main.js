@@ -108,21 +108,3 @@ document.getElementById('year').textContent = new Date().getFullYear();
   });
 })();
 
-
-// ===== GHC: 3D-Glaskarte (ohne HUD, ohne Parallax) ======================
-(() => {
-  const root  = document.getElementById('glassCube');
-  if (!root) return;
-
-  const stars = root.querySelector('.ghc-stars');
-
-  // Ambient "stars"
-  const count = 80;
-  for (let i = 0; i < count; i++) {
-    const s = document.createElement('span');
-    s.style.left = (Math.random() * 100) + '%';
-    s.style.top  = (Math.random() * 100) + '%';
-    s.style.animationDelay = (Math.random() * 6) + 's';
-    stars.appendChild(s);
-  }
-})();
