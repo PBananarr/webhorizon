@@ -1073,3 +1073,36 @@ body.nav-open {
   from { transform: rotateY(0deg); }
   to   { transform: rotateY(360deg); }
 }
+
+
+/* Desktop groß → Standard: --size: 320px (aus deinem :root) */
+
+/* <= 1500px (große Laptops) */
+@media (max-width: 1500px) {
+  :root { --size: 300px; }
+}
+
+/* <= 1200px (klassischer Laptop) */
+@media (max-width: 1200px) {
+  :root { --size: 260px; }
+}
+
+/* <= 992px (Tablet quer) */
+@media (max-width: 992px) {
+  :root { --size: 220px; }
+}
+
+/* <= 768px (Tablet hoch) */
+@media (max-width: 768px) {
+  :root { --size: 200px; }
+}
+
+/* <= 600px (große Phones) */
+@media (max-width: 600px) {
+  :root { --size: 180px; }
+}
+
+/* <= 420px (kleine Phones) */
+@media (max-width: 420px) {
+  :root { --size: 160px; }
+}
