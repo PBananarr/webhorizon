@@ -108,6 +108,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
   });
 })();
 
+
 // ===== GHC: 3D-Glaskarte (ohne HUD, ohne Parallax) ======================
 (() => {
   const root  = document.getElementById('glassCube');
