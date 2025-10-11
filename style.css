@@ -1006,6 +1006,25 @@
       .hero .cube-scene {
         margin-top: 2.25rem;
       }
+
+    }
+
+    /* Hero-Zentrierung auch für < 600px aktivieren */
+    @media (max-width:37.5em) {
+      .hero .hero-copy {
+        max-width: 48ch;
+        margin-inline: auto;
+        text-align: center;
+      }
+
+      .hero .cta-row {
+        justify-content: center;
+      }
+
+      /* optional, falls du die Cube-Stage näher ranholen willst */
+      .hero .cube-scene {
+        margin-top: 2.25rem;
+      }
     }
 
     /* ---------- Leistungen ---------- */
