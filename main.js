@@ -128,3 +128,27 @@ document.getElementById('year').textContent = new Date().getFullYear();
     }, 150);
   });
 })();
+
+
+// Leistungen: Hover/Tap-Fokus für Mockup-Bilder
+(() => {
+  const root = document.querySelector('#leistungen .responsive-mockup');
+  if (!root) return;
+
+  const items = Array.from(root.querySelectorAll('.rm-device'));
+  const activate = (el, autoClearMs = 2500) => {
+    items.forEach(i => i.classList.remove('is-active'));
+    el.classList.add('is-active');
+    clearTimeout(el._gh_clear);
+    if (autoClearMs) el._gh_clear = setTimeout(() => el.classList.remove('is-active'), autoClearMs);
+  };
+
+  items.forEach(el => {
+    el.addEventListener('pointerenter', () => activate(el, 0));        // Desktop-Hover (bleibt aktiv, bis man rausgeht)
+    el.addEventListener('pointerdown',  () => activate(el, 2500));     // Tap: hebt kurz hervor
+  });
+
+  root.addEventListener('pointerleave', () => {
+    items.forEach(i => i.classList.remove('is-active'));
+  });
+})();

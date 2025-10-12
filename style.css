@@ -33,22 +33,8 @@
     --container-max: 75rem;
     --gutter: 2rem;
 
-    /* Device finishes */
-    /* Space Gray (Laptop) */
-    --fin-sg-top: #3a3f46;
-    --fin-sg-bot: #2b2f35;
-    --fin-sg-edge: #20242a;
-    --fin-sg-ring: #171a20;
-
-    /* Tablet solid */
-    --tab-finish: #b3cccf;
-    --tab-ring: #9fb5b8;
-
-    /* Phone gradient um #7589d0 */
-    --ph-top: #eee7d9;
-    --ph-mid: #e3d7c4;
-    --ph-bot: #d6c8b1;
-    --ph-ring: #cbbfae;
+    /* Lesenbreite (≈ 6–7 Wörter pro Zeile) */
+    --measure: clamp(30ch, 32ch + 0.5vw, 36ch);
   }
 
   /* ---------- Reset + Box-Sizing ---------- */
@@ -302,7 +288,7 @@
     gap: .5rem;
     transition: transform .2s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 10px 30px rgba(0, 0, 0, .25);
-    font-size: 0.95rem;
+    font-size: .95rem;
     line-height: 1.2;
   }
 
@@ -484,6 +470,250 @@
     font-weight: 700;
   }
 
+  /* ---------- Responsive Mockup (Leistungen rechts) ---------- */
+  .responsive-mockup {
+    position: relative;
+    min-height: clamp(18rem, 38vw, 34rem);
+  }
+
+  .responsive-mockup .rm-device {
+    position: absolute;
+    margin: 0;
+    filter: drop-shadow(0 6px 18px rgba(0, 0, 0, .25));
+    will-change: transform;
+  }
+
+  .responsive-mockup picture,
+  .responsive-mockup img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* ===== Baseline: 33/66 & Grund-Positionen (1920-Referenz) ===== */
+  #leistungen .leistungen-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    /* 33/66 */
+  }
+
+  /* Grund-Layout (wie Referenz) */
+  .rm-laptop {
+    z-index: 1;
+    left: 60%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .rm-tablet-p {
+    z-index: 2;
+    top: 25%;
+    left: 8%;
+    transform: rotate(-2.5deg);
+  }
+
+  .rm-phone {
+    z-index: 3;
+    left: 80%;
+    top: 40%;
+    transform: translateX(-50%) rotate(6deg);
+  }
+
+  /* ≥1440px: exakte Zielgrößen */
+  @media (min-width: 90em) {
+
+    /* 1440px */
+    .rm-laptop {
+      width: 755.36px;
+    }
+
+    .rm-tablet-p {
+      width: 423px;
+    }
+
+    .rm-phone {
+      width: 200.64px;
+    }
+
+    .responsive-mockup {
+      min-height: 34rem;
+    }
+  }
+
+  @media (max-width: 1599px) {
+    .rm-laptop {
+      width: 655.36px;
+    }
+
+    .rm-tablet-p {
+      width: 323px;
+    }
+
+    .rm-phone {
+      width: 150.64px;
+    }
+
+    .responsive-mockup {
+      min-height: 32rem;
+    }
+  }
+
+  @media (max-width: 1256px) {
+    .rm-laptop {
+      width: 555.36px;
+    }
+
+    .rm-tablet-p {
+      width: 280px;
+    }
+
+    .rm-phone {
+      width: 130.64px;
+    }
+
+    .responsive-mockup {
+      min-height: 30rem;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .rm-laptop {
+      width: 445.36px;
+      left: 50%;
+    }
+
+    .rm-tablet-p {
+      width: 230px;
+      top: 30%;
+    }
+
+    .rm-phone {
+      width: 110.64px;
+      top: 50%;
+    }
+
+    .responsive-mockup {
+      min-height: 25rem;
+    }
+  }
+
+  /* ≤768px*/
+  @media (max-width: 48em) {
+    .rm-laptop {
+      width: 445.36px;
+      left: 50%;
+    }
+
+    .rm-tablet-p {
+      width: 230px;
+      top: 35%;
+      left: 15%;
+    }
+
+    .rm-phone {
+      width: 110.64px;
+      top: 50%;
+      left: 65%;
+    }
+
+    .responsive-mockup {
+      min-height: 25rem;
+    }
+  }
+
+  @media (max-width: 445px) {
+    .rm-laptop {
+      width: 405.36px;
+      left: 50%;
+    }
+
+    .rm-tablet-p {
+      width: 210px;
+      top: 35%;
+      left: 5%;
+    }
+
+    .rm-phone {
+      width: 100.64px;
+      top: 50%;
+      left: 75%;
+    }
+
+    .responsive-mockup {
+      min-height: 25rem;
+      margin-bottom: 5rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .rm-laptop {
+      width: 385.36px;
+      left: 50%;
+    }
+
+    .rm-tablet-p {
+      width: 185px;
+      top: 35%;
+      left: 5%;
+    }
+
+    .rm-phone {
+      width: 85.64px;
+      top: 50%;
+      left: 75%;
+    }
+
+    .responsive-mockup {
+      min-height: 25rem;
+      margin-bottom: 6rem;
+    }
+  }
+
+/* Responsive Mockup – nur Lift, kein Rahmen/Halo */
+.responsive-mockup { perspective:900px; perspective-origin:50% 40%; }
+
+.responsive-mockup .rm-device{
+  isolation:isolate;
+  /* keine outline, kein zusätzlicher shadow hier */
+  transition: filter .3s ease;
+}
+
+.responsive-mockup .rm-device picture{
+  transform: translateZ(0);
+  transition: transform .35s cubic-bezier(.22,.61,.36,1);
+}
+
+/* Hover-Effekt ausschließlich auf dem Gerät selbst */
+@media (any-hover:hover){
+  /* andere Geräte nur dann leicht abdunkeln, wenn wirklich eines :hover hat */
+  .responsive-mockup:has(.rm-device:hover) .rm-device:not(:hover){
+    /* ohne drop-shadow/halo, nur dezentes Dimmen */
+    filter: brightness(.96) saturate(.95) opacity(.9);
+  }
+
+  .responsive-mockup .rm-device:hover{
+    z-index: 10;               /* nach vorn holen */
+    /* kein filter/outline/box-shadow hier */
+  }
+  .responsive-mockup .rm-device:hover picture{
+    transform: translateZ(18px) scale(1.06); /* nur sanfter Lift */
+  }
+}
+
+/* Touch/Script-aktiv: identischer Look wie Hover, ohne Rahmen/Halo */
+.rm-device.is-active{
+  z-index: 10 !important;
+}
+.rm-device.is-active picture{
+  transform: translateZ(18px) scale(1.06);
+}
+
+/* Bewegungsreduktion respektieren */
+@media (prefers-reduced-motion: reduce){
+  .responsive-mockup .rm-device,
+  .responsive-mockup .rm-device picture { transition: none !important; }
+}
+
+
   /* ---------- Gallery ---------- */
   .gallery {
     position: relative;
@@ -537,101 +767,6 @@
 
   .gallery .next {
     right: 10px;
-  }
-
-  /* ---------- Devices: Basis ---------- */
-  .device {
-    --bezel: 10px;
-    --radius: 18px;
-    --frame: #0b1126;
-    --glow: rgba(255, 255, 255, .06);
-    background: var(--frame);
-    border-radius: calc(var(--radius) + 6px);
-    padding: var(--bezel);
-    border: 1px solid var(--frame-border, var(--border));
-  }
-
-  .device img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: var(--radius);
-    display: block;
-  }
-
-  .device.laptop {
-    --bezel: 12px;
-    --radius: 14px;
-    box-shadow: 0 30px 120px rgba(0, 0, 0, .40), inset 0 1px 0 rgba(255, 255, 255, .05);
-  }
-
-  .device.laptop::after {
-    content: "";
-    position: absolute;
-    left: 6%;
-    right: 6%;
-    bottom: -10px;
-    height: 10px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, 0));
-    filter: blur(2px);
-    border-radius: 8px;
-    pointer-events: none;
-  }
-
-  .device.tablet {
-    --bezel: 14px;
-    --radius: 22px;
-    box-shadow: 0 24px 90px rgba(0, 0, 0, .38), inset 0 1px 0 rgba(255, 255, 255, .06);
-  }
-
-  .device.tablet::before {
-    content: "";
-    position: absolute;
-    top: calc(var(--bezel)*.55);
-    left: 50%;
-    width: 7px;
-    height: 7px;
-    transform: translateX(-50%);
-    background: #0e2a4d;
-    border-radius: 50%;
-    box-shadow: 0 0 0 2px #0a1832, 0 0 8px rgba(0, 0, 0, .30) inset;
-  }
-
-  .device.phone {
-    --bezel: 12px;
-    --radius: 26px;
-    box-shadow: 0 22px 80px rgba(0, 0, 0, .36), inset 0 1px 0 rgba(255, 255, 255, .06);
-  }
-
-  .device.phone::before {
-    content: "";
-    position: absolute;
-    top: calc(var(--bezel)*.55);
-    left: 50%;
-    width: 36px;
-    height: 5px;
-    transform: translateX(-50%);
-    background: #0a1a33;
-    border-radius: 4px;
-    box-shadow: 0 0 0 1px #061226 inset;
-  }
-
-  /* Finishes */
-  .device.laptop {
-    --frame: radial-gradient(120% 140% at 30% -20%, rgba(255, 255, 255, .12), transparent 60%), linear-gradient(180deg, var(--fin-sg-top), var(--fin-sg-bot));
-    --frame-border: var(--fin-sg-ring);
-    box-shadow: 0 32px 120px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 255, 255, .05);
-  }
-
-  .device.tablet {
-    --frame: var(--tab-finish);
-    --frame-border: var(--tab-ring);
-    box-shadow: 0 26px 100px rgba(0, 0, 0, .34), inset 0 1px 0 rgba(255, 255, 255, .10);
-  }
-
-  .device.phone {
-    --frame: radial-gradient(115% 130% at 30% -18%, rgba(255, 255, 255, .18), transparent 60%), linear-gradient(180deg, var(--ph-top), var(--ph-mid) 60%, var(--ph-bot));
-    --frame-border: var(--ph-ring);
   }
 
   /* ---------- Prozess: UI-Atoms ---------- */
@@ -773,7 +908,7 @@
     color: var(--txt);
     text-decoration: none;
     opacity: .9;
-    font-size: 0.95rem;
+    font-size: .95rem;
     line-height: 1.2;
   }
 
@@ -883,7 +1018,6 @@
     }
   }
 
-  /* Sternenhimmel im Hero */
   .hero-stars {
     position: absolute;
     inset: 0;
@@ -1085,95 +1219,78 @@
 
   /* Hero: saubere Zeilenumbrüche neben dem Cube (1159px–993px) */
   @media (max-width:72.4375em) and (min-width:62.0625em) {
-
-    /* Gib der Copy etwas mehr Platz gegenüber dem Cube */
     .grid-2 {
       grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
       gap: 2.5rem;
     }
 
-    /* Typo fein runterfahren, damit die H1-Zeilen schön fallen */
     .hero h1 {
       font-size: 3.5rem;
-      /* vorher 4rem */
       line-height: 1.06;
-      /* etwas dichter für kompaktere Blöcke */
       margin: .18em 0 .38em;
     }
 
-    /* Eyebrow leicht größer, harmoniert mit verkleinerter H1 */
     .hero .eyebrow {
       font-size: .9rem;
       letter-spacing: .22em;
       margin-bottom: .85rem;
     }
 
-    /* Lead etwas kompakter, damit sie unter die H1 „greift“ */
     .hero .lead {
       font-size: 1.125rem;
-      /* vorher 1.25rem */
       line-height: 1.65;
       margin-bottom: 1.15rem;
       max-width: 54ch;
-      /* verhindert zu lange Zeilen in dieser Range */
     }
   }
 
-    /* Hero: Tablet-Optimierung (992px–600px) – mehr Präsenz & Rhythmus */
+  /* Hero: Tablet-Optimierung (992px–600px) */
   @media (max-width:992px) and (min-width:426px) {
-    /* etwas kompakterer Section-Frame, damit oben mehr View sichtbar wird */
-    .hero { 
-      padding: 4.75rem 0 3.75rem; /* vorher 5rem 0 4rem */
+    .hero {
+      padding: 4.75rem 0 3.75rem;
     }
 
-    /* Copy darf breiter wirken (bleibt mittig) */
     .hero .hero-copy {
-      max-width: 56ch;         /* vorher 48ch */
+      max-width: 56ch;
       margin-inline: auto;
       text-align: center;
     }
 
-    /* Eyebrow: minimal größer + mehr Luft darunter */
     .hero .eyebrow {
-      font-size: .95rem;       /* vorher .9rem */
+      font-size: .95rem;
       letter-spacing: .24em;
-      margin-bottom: 2rem;     /* vorher .85rem */
+      margin-bottom: 2rem;
     }
 
-    /* H1: etwas größer, dadurch bessere Zeilenlängen und mehr „View“ */
     .hero h1 {
-      font-size: 3.35rem;      /* vorher 3rem */
+      font-size: 3.35rem;
       line-height: 1.06;
-      margin: .22em 0 .60em;   /* mehr Abstand nach unten */
+      margin: .22em 0 .60em;
     }
 
-   .hero .hero-copy h1 .fade {
-    display: block;        /* erlaubt vertikale Abstände */
-    margin-top: .22em;     /* tweak: .16–.30em je nach Geschmack */
+    .hero .hero-copy h1 .fade {
+      display: block;
+      margin-top: .22em;
     }
 
-    /* Lead: leicht größer + mehr Abstand zur CTA */
     .hero .lead {
-      font-size: 1.2rem;       /* vorher 1.125rem */
+      font-size: 1.2rem;
       line-height: 1.7;
-      margin-bottom: 2rem;  /* vorher 1.25rem */
+      margin-bottom: 2rem;
       max-width: 60ch;
       margin-left: auto;
       margin-right: auto;
     }
 
-    /* CTA minimal nach unten rücken, wirkt luftiger */
     .hero .cta-row {
       justify-content: center;
-      margin-top: 1.25rem;     /* vorher 1.1rem */
+      margin-top: 1.25rem;
     }
 
-    /* Cube bleibt gleich groß – kleine Top-Luft für Balance */
     .hero .cube-scene {
-      margin-top: 4rem;        /* unverändert dezent */
+      margin-top: 4rem;
     }
   }
-
 
   /* ---------- Leistungen ---------- */
   #leistungen.section {
@@ -1182,21 +1299,24 @@
     isolation: isolate;
   }
 
+  /* 33/66 Layout: links 1fr (Text), rechts 2fr (Mockups) */
   #leistungen .leistungen-grid {
     display: grid;
-    grid-template-columns: minmax(32ch, 1fr) minmax(420px, 1.4fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
     gap: clamp(1.25rem, 3vw, 3rem);
     align-items: center;
   }
 
+  /* Überschrift linksbündig im hellen Abschnitt */
   #leistungen .section-head {
     text-align: left;
     margin: 0 0 1.25rem;
-    max-width: 42ch;
+    max-width: var(--measure);
   }
 
+  /* Lesebreite: ~6–7 Wörter */
   #leistungen .leistungen-text {
-    max-width: 42ch;
+    max-width: var(--measure);
     font-weight: 500;
     line-height: 1.7;
   }
@@ -1209,91 +1329,39 @@
     margin-bottom: 0;
   }
 
-  #leistungen .devices {
-    position: relative;
-    grid-column: 2;
-    aspect-ratio: 16/10;
-    padding-block: 72px 96px;
-    min-height: 0;
-  }
+  @media (max-width: 992px) {
+    #leistungen .leistungen-grid {
+      grid-template-columns: 1fr 1fr;
+    }
 
-  #leistungen .device {
-    position: absolute;
-    inset: auto;
-    box-shadow: 0 18px 60px rgba(0, 0, 0, .35), var(--shadow);
-  }
-
-  #leistungen .device.laptop {
-    width: min(86%, 880px);
-    aspect-ratio: 16/10;
-    left: 50%;
-    top: 8%;
-    transform: translateX(-50%);
-    z-index: 1;
-  }
-
-  #leistungen .device.tablet {
-    width: min(46%, 520px);
-    aspect-ratio: 3/4;
-    left: 8%;
-    top: 10%;
-    transform: rotate(-6deg);
-    z-index: 2;
-  }
-
-  #leistungen .device.phone {
-    width: min(22%, 260px);
-    aspect-ratio: 9/17;
-    right: 6%;
-    top: 18%;
-    transform: rotate(2deg);
-    z-index: 3;
-  }
-
-  @media (max-width:1200px) {
-    #leistungen .devices {
-      aspect-ratio: 5/4;
-      padding-block: 64px 88px;
+    #leistungen .section-head,
+    #leistungen .leistungen-text {
+      max-width: 60ch;
+      text-align: left;
+      margin-inline: 0;
     }
   }
 
-  @media (max-width:992px) {
+  /* Stack bei ≤ 769px: Text oben, Bilder unten */
+  @media (max-width:48.0625em) {
+
+    /* 769px */
     #leistungen .leistungen-grid {
       grid-template-columns: 1fr;
       align-items: start;
     }
 
-    #leistungen .leistungen-text {
-      text-align: center;
+    #leistungen .section-head {
       margin-inline: auto;
     }
 
-    #leistungen .devices {
-      grid-column: 1;
-      aspect-ratio: 4/5;
-      padding-block: 56px 80px;
-      margin-top: .5rem;
+    #leistungen .leistungen-text {
+      margin-inline: auto;
     }
-  }
 
-  @media (max-width:768px) {
-    #leistungen .devices {
-      aspect-ratio: 3/4;
-      padding-block: 48px 72px;
-    }
-  }
-
-  @media (max-width:600px) {
-    #leistungen .devices {
-      aspect-ratio: 2/3;
-      padding-block: 40px 64px;
-    }
-  }
-
-  @media (max-width:420px) {
-    #leistungen .devices {
-      aspect-ratio: 3/5;
-      padding-block: 32px 56px;
+    .responsive-mockup {
+      margin-top: -3.45rem;
+      min-height: clamp(18rem, 55vw, 26rem);
     }
   }
 
@@ -1775,24 +1843,23 @@
     }
   }
 
-  @media (max-width: 992px) {
+  @media (max-width:992px) {
     :root {
       --size: 210px;
     }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width:600px) {
     :root {
       --size: 180px;
     }
   }
 
-  @media (max-width: 425px) {
+  @media (max-width:425px) {
     :root {
       --size: 140px;
     }
   }
-
 }
 
 /* END sections */
