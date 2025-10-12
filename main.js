@@ -47,6 +47,27 @@ const io = new IntersectionObserver(entries => {
 }, {threshold: .2});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
+// Prozess: aktiven Step + Fortschritt ermitteln
+(() => {
+  const steps = Array.from(document.querySelectorAll('#prozess .steps .step'));
+  const fill = document.querySelector('#prozess .progress-fill');
+  if (!steps.length || !fill) return;
+
+  const inView = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('is-active');
+      else e.target.classList.remove('is-active');
+    });
+    // Fortschritt: Anteil sichtbarer/abgeschlossener Steps
+    const idx = Math.max(0, steps.findLastIndex(s => s.classList.contains('is-active')));
+    const ratio = (idx + 1) / steps.length;
+    fill.style.width = (ratio * 100).toFixed(1) + '%';
+  }, { rootMargin: "-30% 0px -50% 0px", threshold: 0.01 });
+
+  steps.forEach(s => inView.observe(s));
+})();
+
+
 // Gallery basic slider (buttons + drag/swipe)
 const gallery = document.querySelector('.gallery');
 if (gallery) {
@@ -107,4 +128,3 @@ document.getElementById('year').textContent = new Date().getFullYear();
     }, 150);
   });
 })();
-

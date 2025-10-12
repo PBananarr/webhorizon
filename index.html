@@ -27,7 +27,7 @@
   <header class="site-header" id="top">
     <div class="container header-inner">
       <a class="brand" href="#" aria-label="WebHorizon Solutions Startseite">
-        <img src="img/webhorizon-monogramm-ohne-bg_500x5000.svg" alt="" class="brand-mark" width="48" height="48" />
+        <img src="img/webhorizon-monogramm-ohne-bg_500x500.svg" alt="" class="brand-mark" width="48" height="48" />
         <span class="brand-text">WebHorizon <em>Solutions</em></span>
       </a>
 
@@ -71,10 +71,11 @@
               <div class="face left"></div>
               <div class="face top"></div>
               <div class="face bottom"></div>
-              <img class="center-image" src="img/webhorizon-solutions-logo500x500-ohne-bg.png" alt="Center Image">
+              <img class="center-image" src="img/hero/webhorizon-solutions-logo500x500-ohne-bg.png" alt="Ein gläserner Cube zeigt im Inneren das Branding von WebHorizon - Solutions">
             </div>
           </div>
         </div>
+      </div>
     </section>
 
     <section id="leistungen" class="section">
@@ -115,28 +116,87 @@
           <h2>Prozess</h2>
           <p>Transparent, effizient, fokussiert auf Ergebnisse.</p>
         </header>
-        <ol class="steps">
-          <li class="step reveal">
-            <span class="step-num">1</span>
+
+        <!-- Sticky Progress -->
+        <div class="process-progress" aria-hidden="true">
+          <div class="progress-rail"><span class="progress-fill"></span></div>
+        </div>
+
+        <ol class="steps steps--enhanced" role="list">
+          <li class="step reveal" data-step="1">
+            <span class="step-num" aria-hidden="true">1</span>
             <h3>Kickoff</h3>
             <p>Bedarfsanalyse, Ziele, Budgetrahmen – klar definiert.</p>
+            <div class="step-meta">
+              <span class="chip">Dauer: 30–45 min</span>
+              <span class="chip">Output: Briefing</span>
+            </div>
+            <details class="step-more">
+              <summary>Mehr Details</summary>
+              <ul>
+                <li>Technik-Check & Scope</li>
+                <li>Zielgruppen & KPIs</li>
+                <li>Nächste Schritte & Timing</li>
+              </ul>
+            </details>
           </li>
-          <li class="step reveal">
-            <span class="step-num">2</span>
+
+          <li class="step reveal" data-step="2">
+            <span class="step-num" aria-hidden="true">2</span>
             <h3>Design & Prototyp</h3>
             <p>Interaktiver Prototyp mit Fokus auf UX, Motion & Klarheit.</p>
+            <div class="step-meta">
+              <span class="chip">Dauer: 5–10 Tage</span>
+              <span class="chip">Output: Figma-Prototyp</span>
+            </div>
+            <details class="step-more">
+              <summary>Mehr Details</summary>
+              <ul>
+                <li>Wireframes → UI → Micro-Interactions</li>
+                <li>2 Feedback-Schleifen inkl.</li>
+              </ul>
+            </details>
           </li>
-          <li class="step reveal">
-            <span class="step-num">3</span>
+
+          <li class="step reveal" data-step="3">
+            <span class="step-num" aria-hidden="true">3</span>
             <h3>Build & Launch</h3>
             <p>Entwicklung, Tests, Performance-Tuning, Launch & Übergabe.</p>
+            <div class="step-meta">
+              <span class="chip">Dauer: 1–3 Wo.</span>
+              <span class="chip">Output: Live-Site</span>
+            </div>
+            <details class="step-more">
+              <summary>Mehr Details</summary>
+              <ul>
+                <li>CI/CD, Lighthouse 90+, DSGVO-Basics</li>
+                <li>Schulung & Handover</li>
+              </ul>
+            </details>
           </li>
-          <li class="step reveal">
-            <span class="step-num">4</span>
+
+          <li class="step reveal" data-step="4">
+            <span class="step-num" aria-hidden="true">4</span>
             <h3>Care & Growth</h3>
             <p>Wartung, Hosting, SEO-Feinschliff & Weiterentwicklung.</p>
+            <div class="step-meta">
+              <span class="chip">laufend</span>
+              <span class="chip">Output: Roadmap</span>
+            </div>
+            <details class="step-more">
+              <summary>Mehr Details</summary>
+              <ul>
+                <li>Monitoring, Backups, Security-Patches</li>
+                <li>AB-Tests & Content-Sprints</li>
+              </ul>
+            </details>
           </li>
         </ol>
+
+        <div class="process-cta">
+          <a href="#kontakt" class="btn btn-primary">Nächsten Schritt starten</a>
+          <a href="#portfolio" class="btn btn-ghost">Beispiele ansehen</a>
+        </div>
       </div>
     </section>
 
@@ -151,15 +211,15 @@
           <button class="gallery-control prev" aria-label="Vorheriges Projekt">‹</button>
           <div class="gallery-track">
             <figure class="tile">
-              <img src="img/saints-tattoo-website-pirna.jpg" alt="Projekt A – E-Commerce Landing" />
+              <img src="img/portfolio/saints-tattoo-website-pirna.jpg" alt="Projekt A – E-Commerce Landing" />
               <figcaption>Projekt A – E-Commerce Landing</figcaption>
             </figure>
             <figure class="tile">
-              <img src="img/coming-soon.png" alt="Projekt B – Portfolio Seite" />
+              <img src="img/portfolio/coming-soon.png" alt="Projekt B – Portfolio Seite" />
               <figcaption>Projekt B – Portfolio</figcaption>
             </figure>
             <figure class="tile">
-              <img src="img/coming-soon.png" alt="Projekt C – Beratung & Services" />
+              <img src="img/portfolio/coming-soon.png" alt="Projekt C – Beratung & Services" />
               <figcaption>Projekt C – Beratung</figcaption>
             </figure>
           </div>
@@ -170,15 +230,18 @@
 
     <section id="about" class="section section--tinted">
       <div class="container about-flow">
-        <img class="about-float" src="img/selbstportrait-gruender-webhorizon.jpg"
+        <img class="about-float" src="img/aboutMe/selbstportrait-gruender-webhorizon.jpg"
           alt="Portrait von Pierre Bretschneider, Gründer von WebHorizon Solutions" loading="lazy" decoding="async">
 
         <div class="about-text reveal">
           <h2 class="about-heading">Über<br class="br-phone"> mich</h2>
-          <p>Ich bin Pierre Bretschneider – Systemintegration im Blut, Webentwicklung im Herzen. Ich baue Websites, die
-            schnell, sauber und langlebig sind. Mit Fokus auf Details, Bewegung und eine klare Story.</p>
-          <p>Ich setze auf moderne Stacks, Accessibility und messbare Performance. Vom Konzept bis zum Go-Live bleibe
-            ich pragmatisch, transparent und detailverliebt.</p>
+          <p>Ich bin Pierre Bretschneider – Fachinformatiker für Systemintegration mit Leidenschaft für Webentwicklung.
+            Ich entwickle Websites, die schnell, sauber und langlebig sind – mit Fokus auf Struktur, Bewegung und eine klare Story.
+          </p>
+          <p>Ich setze auf moderne Stacks, Accessibility und messbare Performance. 
+            Ich arbeite mit Ruhe, Präzision und einem klaren Blick fürs Wesentliche. 
+            Vom Konzept bis zum Go-Live bleibe ich pragmatisch, transparent und detailverliebt.
+          </p>
           <blockquote class="about-quote">Beratung, Design, Entwicklung &amp; Hosting – alles aus einer Hand. Fokus auf
             Details, Performance und Langlebigkeit.</blockquote>
         </div>
@@ -220,7 +283,7 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <a class="brand small" href="#">
-        <img src="img/webhorizon-monogramm-ohne-bg_500x5000.svg" alt="" width="48" height="48">
+        <img src="img/webhorizon-monogramm-ohne-bg_500x500.svg" alt="" width="48" height="48">
         <span>WebHorizon <em>Solutions</em></span>
       </a>
       <nav aria-label="Footernavigation">
