@@ -686,11 +686,6 @@
       top: 50%;
       left: 75%;
     }
-
-    .responsive-mockup {
-      min-height: 25rem;
-      margin-bottom: 5rem;
-    }
   }
 
   @media (max-width: 400px) {
@@ -710,18 +705,6 @@
       top: 50%;
       left: 75%;
     }
-  }
-
-   @media (max-width: 28em) {            /* ≤ 448px: Stack enger */
-    #leistungen .responsive-mockup { 
-      gap: .4rem;                        /* kleiner Zwischenraum */
-    }
-    #leistungen .responsive-mockup .rm-device {
-      margin: 0;                         /* evtl. Restabstände killen */
-    }
-    /* leichtes Überlappen für „kompakteren“ Look */
-    #leistungen .responsive-mockup .rm-tablet-p { margin-top: -.5rem; }
-    #leistungen .responsive-mockup .rm-phone    { margin-top: -.75rem; }
   }
 
 
@@ -1436,10 +1419,13 @@
     #leistungen .responsive-mockup {
       min-height: 0;
       display: grid;
-      gap: 1rem;
+      gap: .1rem;
       justify-items: center;
+      margin: 0;
     }
 
+    #leistungen .responsive-mockup .rm-tablet-p { margin-top: -.35rem; }
+    #leistungen .responsive-mockup .rm-phone    { margin-top: -.6rem;  }
 
     #leistungen .responsive-mockup .rm-device {
       position: static;
