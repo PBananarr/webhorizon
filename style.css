@@ -599,24 +599,73 @@
   /* ≤768px*/
   @media (max-width: 48em) {
     .rm-laptop {
-      width: 445.36px;
+      width: 545.36px;
       left: 50%;
     }
 
     .rm-tablet-p {
-      width: 230px;
-      top: 35%;
+      width: 260px;
+      top: 55%;
       left: 15%;
     }
 
     .rm-phone {
-      width: 110.64px;
+      width: 140.64px;
       top: 50%;
       left: 65%;
     }
 
     .responsive-mockup {
       min-height: 25rem;
+    }
+  }
+
+   @media (max-width: 664px) {
+    .rm-laptop {
+      width: 505.36px;
+      left: 50%;
+      top: 80%;
+    }
+
+    .rm-tablet-p {
+      width: 240px;
+      top: 35%;
+      left: 5%;
+    }
+
+    .rm-phone {
+      width: 140.64px;
+      top: 50%;
+      left: 75%;
+    }
+
+    .responsive-mockup {
+      min-height: 25rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+    @media (max-width: 500px) {
+    .rm-laptop {
+      width: 405.36px;
+      left: 50%;
+      top: 80%;
+    }
+
+    .rm-tablet-p {
+      width: 200px;
+      left: 5%;
+    }
+
+    .rm-phone {
+      width: 100.64px;
+      left: 75%;
+    }
+
+    .responsive-mockup {
+      min-height: 25rem;
+      margin-top: 3rem;
+      margin-bottom: 3rem;
     }
   }
 
@@ -661,57 +710,19 @@
       top: 50%;
       left: 75%;
     }
+  }
 
-    .responsive-mockup {
-      min-height: 25rem;
-      margin-bottom: 6rem;
+   @media (max-width: 28em) {            /* ≤ 448px: Stack enger */
+    #leistungen .responsive-mockup { 
+      gap: .4rem;                        /* kleiner Zwischenraum */
     }
+    #leistungen .responsive-mockup .rm-device {
+      margin: 0;                         /* evtl. Restabstände killen */
+    }
+    /* leichtes Überlappen für „kompakteren“ Look */
+    #leistungen .responsive-mockup .rm-tablet-p { margin-top: -.5rem; }
+    #leistungen .responsive-mockup .rm-phone    { margin-top: -.75rem; }
   }
-
-/* Responsive Mockup – nur Lift, kein Rahmen/Halo */
-.responsive-mockup { perspective:900px; perspective-origin:50% 40%; }
-
-.responsive-mockup .rm-device{
-  isolation:isolate;
-  /* keine outline, kein zusätzlicher shadow hier */
-  transition: filter .3s ease;
-}
-
-.responsive-mockup .rm-device picture{
-  transform: translateZ(0);
-  transition: transform .35s cubic-bezier(.22,.61,.36,1);
-}
-
-/* Hover-Effekt ausschließlich auf dem Gerät selbst */
-@media (any-hover:hover){
-  /* andere Geräte nur dann leicht abdunkeln, wenn wirklich eines :hover hat */
-  .responsive-mockup:has(.rm-device:hover) .rm-device:not(:hover){
-    /* ohne drop-shadow/halo, nur dezentes Dimmen */
-    filter: brightness(.96) saturate(.95) opacity(.9);
-  }
-
-  .responsive-mockup .rm-device:hover{
-    z-index: 10;               /* nach vorn holen */
-    /* kein filter/outline/box-shadow hier */
-  }
-  .responsive-mockup .rm-device:hover picture{
-    transform: translateZ(18px) scale(1.06); /* nur sanfter Lift */
-  }
-}
-
-/* Touch/Script-aktiv: identischer Look wie Hover, ohne Rahmen/Halo */
-.rm-device.is-active{
-  z-index: 10 !important;
-}
-.rm-device.is-active picture{
-  transform: translateZ(18px) scale(1.06);
-}
-
-/* Bewegungsreduktion respektieren */
-@media (prefers-reduced-motion: reduce){
-  .responsive-mockup .rm-device,
-  .responsive-mockup .rm-device picture { transition: none !important; }
-}
 
 
   /* ---------- Gallery ---------- */
@@ -1363,6 +1374,91 @@
       margin-top: -3.45rem;
       min-height: clamp(18rem, 55vw, 26rem);
     }
+  }
+
+   /* 1) Grid-Kinder dürfen kleiner als ihr Inhalt werden */
+  #leistungen .leistungen-grid > * { 
+    min-width: 0; 
+  }
+
+  /* Hard stop: kein horizontaler Scroll in diesem Abschnitt */
+  #leistungen .container {
+    overflow-x: clip; /* (fallback wäre hidden) */
+  }
+
+  /* ≤ 769px: einspaltig, kein negatives Margin, genug Höhe */
+  @media (max-width: 48.0625em) {
+    #leistungen .leistungen-grid { grid-template-columns: 1fr; }
+    #leistungen .responsive-mockup {
+      margin-top: 0;                     /* war negativ */
+      min-height: clamp(26rem, 82vw, 26rem);
+    }
+  }
+
+  /* 769px → 500px: enger zwischen Text & Mockup + weniger Section-Padding */
+  @media (max-width: 48.0625em) and (min-width: 31.25em) {
+    #leistungen.section {
+      /* vorher clamp(3rem, 6vw, 5rem) → immer ≥ 3rem */
+      padding-block: 2.25rem 2.5rem;
+    }
+    #leistungen .leistungen-grid {
+      grid-template-columns: 1fr; /* sicher gestapelt */
+      row-gap: 1.1rem;            /* enger als das globale gap */
+    }
+    #leistungen .responsive-mockup {
+      /* weniger Luft über den absolut positionierten Devices */
+      min-height: clamp(22rem, 64vw, 30rem);
+    }
+    /* Geräte etwas höher setzen = weniger „Luft“ vor den Bildern */
+    .rm-laptop { top: 42%; }
+    .rm-tablet-p { top: 28%; }
+    .rm-phone  { top: 40%; left: 80%; }
+  }
+
+  /* 500px → 449px: noch kompakter */
+  @media (max-width: 31.25em) and (min-width: 28em) {
+    #leistungen.section {
+      padding-block: 2rem 2.25rem;
+    }
+    #leistungen .leistungen-grid {
+      row-gap: .85rem;
+    }
+    #leistungen .responsive-mockup {
+      min-height: clamp(20rem, 58vw, 26rem);
+    }
+    .rm-laptop { top: 40%; }
+    .rm-tablet-p { top: 35%; }
+    .rm-phone  { top: 42%; }
+  }
+
+  /* ≤ 28em (~448px): Geräte sauber im Fluss stapeln & einpassen */
+  @media (max-width: 28em) {
+    #leistungen .responsive-mockup {
+      min-height: 0;
+      display: grid;
+      gap: 1rem;
+      justify-items: center;
+    }
+
+
+    #leistungen .responsive-mockup .rm-device {
+      position: static;
+      transform: none;
+      filter: none;
+      width: min(92%, 34rem);   /*feste Breite <= Container */
+      max-width: 100%;
+      margin: 0;               /* kein auto-Offset nach rechts */
+    }
+    #leistungen .responsive-mockup .rm-device picture,
+    #leistungen .responsive-mockup .rm-device img {
+      width: 100%;
+      height: auto;
+    }
+
+    /* Alternative mit fixeren Pixelgrenzen */
+  #leistungen .responsive-mockup .rm-laptop   { width: min(92%, clamp(340px, 100vw, 436px)); }
+  #leistungen .responsive-mockup .rm-tablet-p { width: min(92%, clamp(280px, 70vw, 224px)); }
+  #leistungen .responsive-mockup .rm-phone    { width: min(92%, clamp(220px, 46vw, 152px)); }
   }
 
   /* ---------- Prozess (Timeline & States) ---------- */
